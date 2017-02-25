@@ -1,0 +1,12 @@
+<h1 align="center">Trips Index</h1>
+<hr />
+<% @trips.each do |trip| %>
+	<div class="row">
+		<div class="col-md-8 well">
+			<h4><%= trip.name %></h4>
+			<h5><%= trip.destination %></h5>
+			<small>Created <%= time_ago_in_words(trip.created_at) %> ago</small>
+		</div>
+	</div>
+
+<% end %>
