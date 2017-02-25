@@ -3,7 +3,8 @@ require 'test_helper'
 
 class TripTest < ActiveSupport::TestCase
   def setup
-    @trip = Trip.new(name: "Korea Trip", destination: "Seoul, Korea")
+    @user = User.create(name: "Steve", email: "steve@email.com")
+    @trip = @user.trips.build(name: "Korea Trip", destination: "Seoul, Korea")
   end
 
   test "trip should be valid" do
@@ -27,6 +28,11 @@ class TripTest < ActiveSupport::TestCase
 
   test "destination shouldn't be more than 500 characters" do
     @trip.destination = "a" * 501
+    assert_not @trip.valid?
+  end
+
+  test "trip without user should be invalid" do
+    @trip.user_id = nil
     assert_not @trip.valid?
   end
 
