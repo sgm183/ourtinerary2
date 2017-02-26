@@ -32,6 +32,7 @@ class TripsTest < ActionDispatch::IntegrationTest
     assert_match @user.name, response.body
     assert_select 'a[href=?]', edit_trip_path(@trip), text: "Edit this trip"
     assert_select 'a[href=?]', trip_path(@trip), text: "Delete this trip"
+    assert_select 'a[href=?]', trips_path, text: "Return to trips"
   end
 
   test "create new valid trip" do
