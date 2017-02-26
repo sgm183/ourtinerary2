@@ -1,1 +1,5 @@
-<%= render 'shared/page_title', title: "Your Profile" %>
+<%= render 'shared/page_title', title: "#{@user.name}'s profile " %>
+
+
+<h2 align="center"><%= @user.name %>'s trips</h4>
+<%= render 'trips/trip', obj: @user.trips %>
