@@ -24,12 +24,25 @@ class TripsController < ApplicationController
 
   end
 
+  def edit
+    @trip = Trip.find(params[:id])
+  end
+
+  def update
+    @trip = Trip.find(params[:id])
+    if @trip.update(trip_params)
+      flash[:success] = "Trip was updated!"
+      redirect_to trip_path(@trip)
+    else
+      render 'edit'
+    end
+  end
+
+
   private
 
   def trip_params
     params.require(:trip).permit(:name, :destination)
   end
-
-
 
 end
