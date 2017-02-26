@@ -3,7 +3,8 @@ require 'test_helper'
 
 class TripTest < ActiveSupport::TestCase
   def setup
-    @user = User.create(name: "Steve", email: "steve@email.com")
+    @user = User.create(name: "Steve", email: "steve@email.com",
+                        password: "password", password_confirmation: "password")
     @trip = @user.trips.build(name: "Korea Trip", destination: "Seoul, Korea")
   end
 

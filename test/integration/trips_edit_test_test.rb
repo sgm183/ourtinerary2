@@ -3,7 +3,8 @@ require 'test_helper'
 class TripsEditTestTest < ActionDispatch::IntegrationTest
 
   def setup
-    @user = User.create!(name: "Steve", email: "steve@email.com")
+    @user = User.create!(name: "Steve", email: "steve@email.com",
+                         password: "password", password_confirmation: "password")
     @trip = Trip.create(name: "Visit Parents", destination: "California", user: @user)
   end
 
