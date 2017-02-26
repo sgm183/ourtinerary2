@@ -36,4 +36,5 @@ class TripTest < ActiveSupport::TestCase
     assert_not @trip.valid?
   end
 
+
 end

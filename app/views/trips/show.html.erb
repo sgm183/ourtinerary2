@@ -1,0 +1,16 @@
+<%= render 'shared/page_title', title: @trip.name %>
+<div class="well col-md-8 col-md-offset-2">
+	<h4 class="center description"><strong>Description: </strong></h4>
+	<hr />
+	<%= @trip.destination %>
+	<p>
+		Created by:
+	</p>
+	<p>
+		<small><%= @trip.user.name %></small>
+		<div class="pull-right">
+			created: <%= time_ago_in_words(@trip.created_at) %> ago
+		</div>
+	</p>
+
+</div>
