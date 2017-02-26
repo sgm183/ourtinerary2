@@ -1,3 +1,11 @@
 <%= render 'shared/page_title', title: "showing all trips" %>
 
+<div align="center">
+	<%= will_paginate %>
+</div>
+
 <%= render 'trip', obj: @trips %>
+
+<div align="center">
+	<%= will_paginate %>
+</div>

@@ -2,4 +2,13 @@
 
 
 <h2 align="center"><%= @user.name %>'s trips</h4>
-<%= render 'trips/trip', obj: @user.trips %>
+
+<div align="center">
+  <%= will_paginate @user_trips %>
+</div>
+
+<%= render 'trips/trip', obj: @user_trips %>
+
+<div align="center">
+  <%= will_paginate @user_trips %>
+</div>
