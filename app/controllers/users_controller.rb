@@ -38,6 +38,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:danger] = "User and all associated trips deleted!"
+    redirect_to users_path
+  end
+
+
 
   private
 

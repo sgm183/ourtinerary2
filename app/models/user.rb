@@ -6,7 +6,7 @@ class User < ApplicationRecord
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
 
-  has_many :trips
+  has_many :trips, dependent: :destroy
 
   has_secure_password
 

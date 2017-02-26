@@ -60,4 +60,23 @@ class UserTest < ActiveSupport::TestCase
     assert_equal mixed_email.downcase, @user.reload.email
   end
 
+  test "password should be present" do
+    @user.password = @user.password.confirmation = " "
+    assert_not @user.valid?
+  end
+
+  test "password should be at least 5 characters" do
+    @user.password = @user.password.confirmation = "x" * 4
+    assert_not @user.valid?
+  end
+
+  test "associated trips should be destroyed" do
+    @user.save
+    @user.trips.create!(name: "testin destroy", destination: "testing destroy function")
+    assert_difference 'Trip.count', -1 do
+      @user.destroy
+    end
+
+  end
+
 end
