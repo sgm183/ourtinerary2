@@ -8,7 +8,7 @@
 		created by: <%= link_to @trip.user.name, trips_path %> <%= time_ago_in_words(@trip.created_at) %> ago
 	</div>
 	<div class="trip-actions">
-		<% if logged_in? && current_user == @trip.user %>
+		<% if logged_in? && (current_user == @trip.user || current_user.admin?) %>
 			<%= link_to "Edit this trip", edit_trip_path(@trip), class: "btn btn-xs btn-warning" %>
 			<%= link_to "Delete this trip", trip_path(@trip), method: :delete,
 							data: { confirm: "Are you sure you want to delete?"},

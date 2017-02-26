@@ -7,7 +7,7 @@
 				<small>Created by <%= link_to trip.user.name, root_path %>
 					<%= time_ago_in_words(trip.created_at) %> ago</small>
 			</div>
-			<% if logged_in? && current_user == trip.user %>
+			<% if logged_in? && (current_user == trip.user || current_user.admin?) %>
 				<div class="trip-actions">
 
 					<%= link_to "Edit this trip", edit_trip_path(trip), class: "btn btn-xs btn-warning" %>

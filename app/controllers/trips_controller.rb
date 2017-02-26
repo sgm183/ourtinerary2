@@ -59,7 +59,7 @@ class TripsController < ApplicationController
   end
 
   def require_same_user
-    if current_user != @trip.user
+    if current_user != @trip.user and !current_user.admin?
       flash[:danger] = "You can only edit or delete your own trips"
       redirect_to trips_path
     end
