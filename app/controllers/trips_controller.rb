@@ -1,5 +1,7 @@
 class TripsController < ApplicationController
-  before_action :set_trip, only: [:show, :edit, :update]
+  before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
     @trips = Trip.paginate(page: params[:page], per_page: 3)
@@ -14,7 +16,7 @@ class TripsController < ApplicationController
 
   def create
     @trip = Trip.new(trip_params)
-    @trip.user = User.first
+    @trip.user = current_user
     if @trip.save
       flash[:success] = "Trip was created successfully!"
       redirect_to trip_path(@trip)
@@ -55,5 +57,13 @@ class TripsController < ApplicationController
   def trip_params
     params.require(:trip).permit(:name, :destination)
   end
+
+  def require_same_user
+    if current_user != @trip.user
+      flash[:danger] = "You can only edit or delete your own trips"
+      redirect_to trips_path
+    end
+  end
+
 
 end

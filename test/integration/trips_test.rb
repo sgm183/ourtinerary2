@@ -27,6 +27,7 @@ class TripsTest < ActionDispatch::IntegrationTest
   end
 
   test "should get trips show" do
+    sign_in_as(@user, "password")
     get trip_path(@trip)
     assert_template 'trips/show'
     assert_match @trip.name, response.body
@@ -38,6 +39,7 @@ class TripsTest < ActionDispatch::IntegrationTest
   end
 
   test "create new valid trip" do
+    sign_in_as(@user, "password")
     get new_trip_path
     assert_template 'trips/new'
     name_of_trip = "Visit LA"
@@ -52,6 +54,7 @@ class TripsTest < ActionDispatch::IntegrationTest
   end
 
   test "reject invalid trip submissions" do
+    sign_in_as(@user, "password")
     get new_trip_path
     assert_template 'trips/new'
     assert_no_difference 'Trip.count' do

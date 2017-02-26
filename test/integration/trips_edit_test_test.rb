@@ -9,6 +9,7 @@ class TripsEditTestTest < ActionDispatch::IntegrationTest
   end
 
   test "reject invalid trip update" do
+    sign_in_as(@user, "password")
     get edit_trip_path(@trip)
     assert_template 'trips/edit'
     patch trip_path(@trip), params: { trip: { name: " ", destination: "some destination"} }
@@ -18,6 +19,7 @@ class TripsEditTestTest < ActionDispatch::IntegrationTest
   end
 
   test "successfully edit a trip" do
+    sign_in_as(@user, "password")
     get edit_trip_path(@trip)
     assert_template 'trips/edit'
     updated_name = "updated trip name"
