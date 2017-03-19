@@ -55,7 +55,7 @@ class TripsController < ApplicationController
 
 
   def trip_params
-    params.require(:trip).permit(:name, :destination)
+    params.require(:trip).permit(:name, :destination, :start_date, :end_date, :num_of_travelers)
   end
 
   def require_same_user

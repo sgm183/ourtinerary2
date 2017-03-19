@@ -3,6 +3,9 @@
 		<div class="col-md-8 well">
 			<h4><%= link_to trip.name, trip_path(trip) %></h4>
 			<h5><%= trip.destination %></h5>
+			<h5>Start date: <%= trip.start_date %></h5>
+			<h5>End date: <%= trip.end_date %></h5>
+			<h5>Number of Travlers: <%= trip.num_of_travelers %></h5>
 			<div class="pull-right">
 				<small>Created by <%= link_to trip.user.name, root_path %>
 					<%= time_ago_in_words(trip.created_at) %> ago</small>

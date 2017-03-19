@@ -4,6 +4,9 @@
 	<h4 class="center description"><strong>Description: </strong></h4>
 	<hr />
 	<%= @trip.destination %>
+	<h5>Start date: <%= @trip.start_date %></h5>
+	<h5>End date: <%= @trip.end_date %></h5>
+	<h5>Number of Travelers: <%= @trip.num_of_travelers %></h5>
 	<div class="pull-right">
 		created by: <%= link_to @trip.user.name, trips_path %> <%= time_ago_in_words(@trip.created_at) %> ago
 	</div>

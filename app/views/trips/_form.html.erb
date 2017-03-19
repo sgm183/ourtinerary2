@@ -1,32 +1,149 @@
 <%= render 'shared/errors', obj: @trip %>
+<div class="container">
+    <div class="row">
+    	<div class="container">
+			<div class="wizard">
+				<div class="wizard-inner">
+					<div class="connecting-line"></div>
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active">
+							<a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+								Let's Begin
+							</a>
+						</li>
 
-<div class="row">
-    <div class="col-md-12">
-		<%= form_for(@trip, :html => {class: "form-horizontal", role: "form"}) do |f| %>
-			<div class="form-group">
-				<div class="control-label col-md-2">
-					<%= f.label :name %>
+						<li role="presentation" class="disabled">
+							<a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+								Build Itinerary
+							</a>
+						</li>
+						<li role="presentation" class="disabled">
+							<a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+								Publish
+							</a>
+						</li>
+					</ul>
 				</div>
-				<div class="col-md-8">
-					<%= f.text_field :name, class: "form-control", placeholder: "Name of trip", autofocus: true %>
+
+					<!-- <form role="form"> -->
+				<%= form_for(@trip, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+					<div class="tab-content">
+						<div class="tab-pane active" role="tabpanel" id="step1">
+							<div class="step1" style="margin:40px">
+								<div class="row">
+									<div class="col-md-9">
+										<%= f.label :name %>
+										<%= f.text_field :name, class: "form-control", id: "tripNameInput", placeholder: "Name of trip", autofocus: true %>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3">
+										<%= f.label :destination %>
+										<%= f.text_field :destination, rows: 10, class: "form-control", id: "tripDestinationInput", placeholder: "Enter Destination" %>
+									</div>
+									<div class="col-md-3">
+										<%= f.label :start_date %>
+										<%= f.date_field :start_date, class: "form-control", id: "tripStartDateInput", placeholder: "Start Date" %>
+										<%= f.label :end_date %>
+										<%= f.date_field :end_date, class: "form-control", id: "tripEndDateInput", placeholder: "End Date" %>
+									</div>
+									<div class="col-md-3">
+										<%= f.label :number_of_travelers %>
+										<%= f.number_field :num_of_travelers, class: "form-control", id: "tripNumTravelerInput", placeholder: "Number of Travelers" %>
+									</div>
+								</div>
+								<ul class="list-inline pull-right">
+									<li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+								</ul>
+							</div>
+						</div>
+						<div class="tab-pane" role="tabpanel" id="step2">
+							<div class="step2" style="margin:30px">
+								<div class="step_21">
+									<div class="row">
+										<div class="col-md-3">
+											<div id="tripNameDisplay"></div>
+										</div>
+										<div class="col-md-3">
+											<div id="tripDestinationDisplay"></div>
+										</div>
+										<div class="col-md-3">
+											<div id="tripNumTravelerDisplay"></div>
+										</div>
+										<div class="col-md-3">
+											<div id="tripStartDateDisplay"></div>
+											<div id="tripEndDateDisplay"></div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-9">
+											<div id="tripDates">
+												Trip Dates:
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-9">
+											<button type="button" data-toggle="modal" data-target="#addTripItemModal" class="btn btn-primary btn-block trip-add-item">Add Item</button>
+										</div>
+									</div>
+
+									<div class="modal fade" id="addTripItemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<h4 class="modal-title" id="myModalLabel">Add Item</h4>
+												</div>
+												<div class="modal-body">
+													<p>Type a restaurant/tour/activiy</p>
+													<p>select type</p>
+													<p>which date is this for?</p>
+													<p>how much did we spend on this item?</p>
+													<p>where is it located?</p>
+													<p>person to contact</p>
+													<p>Contact Number</p>
+
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-primary">Add Item</button>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="container">
+												Day 1 Itinerary Items
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-9">
+											<button type="button" class="btn btn-primary btn-block trip-add-item">Add Item</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<ul class="list-inline pull-right">
+								<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+								<li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+							</ul>
+						</div>
+						<div class="tab-pane" role="tabpanel" id="complete">
+							<div class="step44">
+								<%= f.submit class: "btn btn-primary btn-lg" %>
+
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				<% end %>
+				<div class="col-md-4 col-sm-offset-4">
+					[<%= link_to "Cancel and return to Trip Listing", trips_path %>]
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="control-label col-md-2">
-					<%= f.label :destination %>
-				</div>
-				<div class="col-md-8">
-					<%= f.text_field :destination, rows: 10, class: "form-control", placeholder: "Enter Destination" %>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-offset-2 col-md-10">
-					<%= f.submit class: "btn btn-primary btn-lg" %>
-				</div>
-			</div>
-		<% end %>
-		<div class="col-md-4 col-sm-offset-4">
-			[<%= link_to "Cancel and return to Trip Listing", trips_path %>]
 		</div>
 	</div>
 </div>
