@@ -1,0 +1,2 @@
+module TripitemsHelper
+end

@@ -4,8 +4,11 @@ class Trip < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
 
+  has_many :tripitems
+
   belongs_to :user
   validates :user_id, presence: true
+
 
   default_scope -> { order(updated_at: :desc)}
 

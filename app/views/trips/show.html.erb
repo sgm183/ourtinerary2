@@ -10,6 +10,7 @@
 	<div class="pull-right">
 		created by: <%= link_to @trip.user.name, trips_path %> <%= time_ago_in_words(@trip.created_at) %> ago
 	</div>
+
 	<div class="trip-actions">
 		<% if logged_in? && (current_user == @trip.user || current_user.admin?) %>
 			<%= link_to "Edit this trip", edit_trip_path(@trip), class: "btn btn-xs btn-warning" %>
@@ -18,8 +19,72 @@
 							class: "btn btn-xs btn-warning" %>
 		<% end %>
 
-
 		<%= link_to "Return to trips", trips_path, class: "btn btn-xs btn-warning" %>
 
 	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+
+			<% @trip.tripitems.each do |tripitem| %>
+				<p>
+					<%= tripitem.name %> <br>
+					<%= tripitem.itemtype %> <br>
+					<%= tripitem.date %>
+					<%= tripitem.cost %>
+					<%= tripitem.location %>
+					<%= tripitem.pocname %>
+					<%= tripitem.pocphone %>
+					<%= tripitem.creatorcomment %>
+				</p>
+			<% end %>
+
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-9">
+			<button type="button" data-toggle="modal" data-target="#addTripItemModal" class="btn btn-primary btn-block trip-add-item" style="margin-top:20px">Add Item</button>
+		</div>
+	</div>
+
+	<div class="modal fade" id="addTripItemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Add Item</h4>
+				</div>
+				<div class="modal-body">
+					<%= form_for ([@trip, @trip.tripitems.build]) do |f| %>
+						<%= f.label :name %>
+						<%= f.text_field :name %>
+
+						<%= f.label :itemtype %>
+						<%= f.text_field :itemtype %>
+
+						<%= f.label :date %>
+						<%= f.date_field :date %>
+
+						<%= f.label :cost %>
+						<%= f.number_field :cost %>
+
+						<%= f.label :pocname %>
+						<%= f.text_field :pocname %>
+
+						<%= f.label :pocphone %>
+						<%= f.text_field :pocphone %>
+
+						<%= f.label :creatorcomment %>
+						<%= f.text_field :creatorcomment %>
+
+						<%= f.submit class: "btn btn-primary" %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
 </div>
